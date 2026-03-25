@@ -19,18 +19,8 @@
 #include <queue>
 #include <cmath>
 
-/*
-Lärdomar:
-1. Tänk på returvärdet
-2. Tänk på ordningen i main, vi vill börja med att kontrollera först att antal argc är korrekt
-3. Tänk på andra viktiga kontroller när argc > 3, t ex när vi ska sätta in period
-4. Det går att overloada <<operator så att den kan skriva ut marketdata
-5. Håll koll på vilken argv[i] är till för vilken del, ex funktion, csv, period
-6. Tänk på att return inom en loop kan leda till att vi preemptive går ut ur loopen utan att
-ha kontrollerat allt vi behöver
-7. Bättre att ha STRING filename = x, än att hårdkoday, bättre också att göra den till string än
-char* []
-*/
+
+
 
 
 using namespace std;
@@ -97,7 +87,7 @@ double Total_VWAP (const vector<MarketData>& data)
             throw runtime_error("Invalid data row");
         }
         double typical_price = 0;
-        typical_price = (data[i].close + data[i].high + data[i].low) / 3;
+        typical_price = (data[i].close + data[i].high + data[i].low) / 3; // tp
         sum_tp_vol += typical_price * data[i].volume;
         sum_vol += data[i].volume;
     }
@@ -109,7 +99,7 @@ double Total_VWAP (const vector<MarketData>& data)
 double Std1_VWAP (const vector<MarketData>& data)
 {
     /*Täljare formel: 
-    conrtibtuin = vol[i] * (price[i]- wvwap)^2
+    contribution = vol[i] * (price[i]- wvwap)^2
     */
 
     double contribution = 0;
